@@ -12,10 +12,11 @@ To get you started quickly.
 1. Custom Classification - Folder per Class
 2. Imagenet [TODO]
 3. Coco [TODO]
-4. Kitti [TODO]
-5. Tensorbox [TODO]
-6. CamVid [TODO]
-7. ROS-Robot (as data source) [TODO]
+4. Cifar10/Cifar100 [TODO]
+5. Kitti [TODO]
+6. Tensorbox [TODO]
+7. CamVid [TODO]
+8. ROS-Robot (as data source) [TODO]
 
 ## Models
 
