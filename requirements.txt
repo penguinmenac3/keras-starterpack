@@ -1,0 +1,7 @@
+tensorflow-gpu
+keras
+numpy
+scikit-image
+scikit-learn
+scipy
+matplotlib
