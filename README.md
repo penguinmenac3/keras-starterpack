@@ -12,7 +12,7 @@ To get you started quickly.
 1. Custom Classification - Folder per Class
 2. Imagenet [TODO]
 3. Coco [TODO]
-4. Cifar10/Cifar100 [TODO]
+4. Cifar10/Cifar100
 5. Kitti [TODO]
 6. Tensorbox [TODO]
 7. CamVid [TODO]
