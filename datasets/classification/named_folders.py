@@ -3,7 +3,7 @@ from scipy.misc import imread
 from random import shuffle
 
 
-def data_generator(base_dir, phase):
+def named_folders(base_dir, phase):
     classes_dir = os.path.join(base_dir, phase)
     classes = os.listdir(classes_dir)
     images = []
@@ -28,7 +28,7 @@ def data_generator(base_dir, phase):
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
-    imgs_per_class, gen = data_generator("D:\Data\Projects\CVHCI-Lecture-Assignments\A2\data", "test")
+    imgs_per_class, gen = named_folders("data/person_classification", "train")
 
     print("Classes and image count:")
     print(imgs_per_class)
