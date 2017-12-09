@@ -10,13 +10,16 @@ There are handlers for several datasets.
 To get you started quickly.
 
 1. Custom Classification - Folder per Class
-2. Imagenet [TODO]
+2. ImageNet [TODO]
 3. Coco [TODO]
 4. Cifar10/Cifar100
-5. Kitti [TODO]
-6. Tensorbox [TODO]
-7. CamVid [TODO]
-8. ROS-Robot (as data source) [TODO]
+5. PASCAL VOC [TODO]
+6. Places [TODO]
+7. Kitti [TODO]
+8. Tensorbox [TODO]
+9. CamVid [TODO]
+10. Cityscapes [TODO]
+11. ROS-Robot (as data source) [TODO]
 
 ## Models
 
