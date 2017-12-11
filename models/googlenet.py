@@ -106,7 +106,7 @@ def googlenet(weights_path=None, get_output_layers=False):
         model.load_weights(weights_path)
 
     if get_output_layers:
-        layers = {"mixed4a": inception_4a, "mixed4d": inception_4d, "mixed5b": inception_5b, "probs": class_probs}
+        layers = {"input": input, "mixed4a": inception_4a, "mixed4d": inception_4d, "mixed5b": inception_5b, "probs": class_probs}
         return model, layers
 
     return model
