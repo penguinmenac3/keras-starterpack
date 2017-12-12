@@ -1,5 +1,6 @@
 .idea
 *.pyc
-*.h5
 data/*
 models/weights/*.png
+models/weights/*.json
+models/weights/*.h5

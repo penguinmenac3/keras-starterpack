@@ -9,13 +9,20 @@ def one_hot(idx, max_idx):
     label[idx] = 1
     return label
 
-def named_folders(base_dir, phase, prepare_features=None):
+
+def crop_center(img,cropx,cropy):
+    y, x, _ = img.shape
+    startx = x//2-(cropx//2)
+    starty = y//2-(cropy//2)
+    return img[starty:starty+cropy, startx:startx+cropx, :]
+
+
+def named_folders(base_dir, phase, prepare_features=None, class_idx={}, crop_roi=None):
     classes_dir = os.path.join(base_dir, phase)
     classes = os.listdir(classes_dir)
     images = []
     labels = []
     imgs_per_class = {}
-    class_idx = {}
     for c in classes:
         if c not in class_idx:
             class_idx[c] = len(class_idx)
@@ -24,6 +31,8 @@ def named_folders(base_dir, phase, prepare_features=None):
         for filename in os.listdir(class_dir):
             if filename.endswith(".png"):
                 feature = imread(os.path.join(class_dir, filename), mode="RGB")
+                if crop_roi is not None:
+                    feature = crop_center(feature, crop_roi[0], crop_roi[1])
                 if prepare_features:
                     feature = prepare_features(feature)
                 images.append(feature)
@@ -37,7 +46,8 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
     print("Loading Dataset:")
-    imgs_per_class, images, labels, class_idx = named_folders("data/person_classification", "train")
+    roi = (50, 100)
+    imgs_per_class, images, labels, class_idx = named_folders("data/person_classification", "train", crop_roi=roi)
 
     print("Classes and image count:")
     print(imgs_per_class)
@@ -47,7 +57,11 @@ if __name__ == "__main__":
 
     print(labels[-1])
 
+    i = 0
     for img, class_name in zip(images, labels):
+        i += 1
+        if i < 2430:
+            continue
         print(class_name)
         plt.imshow(img)
         plt.show()
