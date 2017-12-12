@@ -33,7 +33,7 @@ Just check the comment at the top of their source files.
 3. GoogLeNet (Inception v3)
 4. Overfeat/Tensorbox [TODO]
 5. ResNet [TODO]
-6. SegNet [TODO]
+6. SegNet
 7. Mask RCNN [TODO]
 8. monoDepth [TODO]
 
