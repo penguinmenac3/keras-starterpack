@@ -19,36 +19,40 @@ def prepare_data(img):
 
 
 def tinypersonnet(weights_path=None, remove_classifier=False):
+    l2_weight = 0.0
     x = Input(shape=(96, 160, 3))
     print("Input shape: ")
     print(x._keras_shape)
 
     conv1 = x
-    conv1 = Conv2D(16, (3, 3), activation='relu')(conv1)
-    pool1 = MaxPooling2D((2,2), strides=(2,2))(conv1)
+    conv1 = Conv2D(16, (3, 3), activation='relu', name="conv1", kernel_regularizer=l2(l2_weight))(conv1)
+    pool1 = MaxPooling2D((2, 2), strides=(2, 2), name="pool1")(conv1)
 
     conv2 = pool1
-    conv2 = Conv2D(16, (3, 3), activation='relu')(conv2)
-    pool2 = MaxPooling2D((2,2), strides=(2,2))(conv2)
+    conv2 = Conv2D(16, (3, 3), activation='relu', name="conv2", kernel_regularizer=l2(l2_weight))(conv2)
+    pool2 = MaxPooling2D((2, 2), strides=(2, 2), name="pool2")(conv2)
 
     conv3 = pool2
-    conv3 = Conv2D(32, (3, 3), activation='relu')(conv3)
-    pool3 = MaxPooling2D((2,2), strides=(2,2))(conv3)
+    conv3 = Conv2D(32, (3, 3), activation='relu', name="conv3", kernel_regularizer=l2(l2_weight))(conv3)
+    pool3 = MaxPooling2D((2, 2), strides=(2, 2), name="pool3")(conv3)
+    pool3 = Dropout(0.5)(pool3)
 
     conv4 = pool3
-    conv4 = Conv2D(32, (3, 3), activation='relu')(conv4)
-    pool4 = MaxPooling2D((2,2), strides=(2,2))(conv4)
+    conv4 = Conv2D(32, (3, 3), activation='relu', name="conv4", kernel_regularizer=l2(l2_weight))(conv4)
+    pool4 = MaxPooling2D((2, 2), strides=(2, 2), name="pool4")(conv4)
+    pool4 = Dropout(0.5)(pool4)
 
     conv5 = pool4
-    conv5 = Conv2D(32, (3, 3), activation='relu')(conv5)
-    pool5 = MaxPooling2D((2,2), strides=(2,2))(conv5)
+    conv5 = Conv2D(32, (3, 3), activation='relu', name="conv5", kernel_regularizer=l2(l2_weight))(conv5)
+    pool5 = MaxPooling2D((2, 2), strides=(2, 2), name="pool5")(conv5)
+    pool5 = Dropout(0.5)(pool5)
 
-    conv6 = Conv2D(32, (1, 3), activation='relu')(pool5)
-    conv6 = Dropout(0.5)(conv6)
+    fc1 = Conv2D(32, (1, 3), activation='relu', name="fc1", kernel_regularizer=l2(l2_weight))(pool5)
+    fc1 = Dropout(0.5)(fc1)
 
-    conv7 = Conv2D(2, (1,1), activation='softmax')(conv6)
+    probs = Conv2D(2, (1, 1), activation='softmax', name="probs", kernel_regularizer=l2(l2_weight))(fc1)
 
-    output = Flatten()(conv7)
+    output = Flatten()(probs)
     print("Output shape: ")
     print(output._keras_shape)
 

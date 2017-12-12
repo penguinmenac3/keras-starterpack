@@ -2,6 +2,7 @@ from models.tinypersonnet import tinypersonnet, prepare_data
 from datasets.classification.named_folders import named_folders
 from keras.optimizers import SGD
 from keras.utils import plot_model
+from utils.plot_losses import PlotLosses
 
 
 if __name__ == "__main__":
@@ -17,13 +18,14 @@ if __name__ == "__main__":
 
     print("\nCreating Model: tinypersonnet")
     model = tinypersonnet()
-    plot_model(model, to_file='models/weights/tinypersonnet.png', show_shapes=True)
-    print("Saved structure in: models/weights/tinypersonnet.png")
+    plot_model(model, to_file='models/weights/tinypersonnet_architecture.png', show_shapes=True)
+    print("Saved structure in: models/weights/tinypersonnet_architecture.png")
 
     print("\nCreate SGD Optimizer")
     sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(optimizer=sgd, loss='categorical_crossentropy')
+    model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=["accuracy"])
 
     print("\nFit model...")
-    model.fit(x=images, y=labels, epochs=10000, validation_data=(test_images, test_labels))
+    plot_losses = PlotLosses("models/weights/tinypersonnet_loss.png", "models/weights/tinypersonnet_acc.png")
+    model.fit(x=images, y=labels, epochs=10000, callbacks=[plot_losses], validation_data=(test_images, test_labels), verbose=0)
     model.save_weights("models/weights/tinypersonnet.h5")
