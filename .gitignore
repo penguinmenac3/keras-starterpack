@@ -1,5 +1,6 @@
 .idea
 *.pyc
+venv
 data/*
 models/weights/*.png
 models/weights/*.json

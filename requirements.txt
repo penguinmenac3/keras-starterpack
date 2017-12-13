@@ -1,4 +1,4 @@
-#tensorflow-gpu
+tensorflow-gpu
 keras
 numpy
 scikit-image
