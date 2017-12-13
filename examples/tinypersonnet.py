@@ -25,8 +25,8 @@ if __name__ == "__main__":
 
     print("\nCreating Model: tinypersonnet")
     model = tinypersonnet()
-    #plot_model(model, to_file='models/weights/tinypersonnet_architecture_%s.png' % time_str, show_shapes=True)
-    #print("Saved structure in: models/weights/tinypersonnet_architecture_%s.png" % time_str)
+    plot_model(model, to_file='models/weights/tinypersonnet_architecture_%s.png' % time_str, show_shapes=True)
+    print("Saved structure in: models/weights/tinypersonnet_architecture_%s.png" % time_str)
 
     print("\nCreate SGD Optimizer")
     sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
