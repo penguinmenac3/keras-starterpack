@@ -17,8 +17,11 @@ def crop_center(img,cropx,cropy):
     return img[starty:starty+cropy, startx:startx+cropx, :]
 
 
-def named_folders(base_dir, phase, prepare_features=None, class_idx={}, crop_roi=None):
-    classes_dir = os.path.join(base_dir, phase)
+def named_folders(base_dir, phase, prepare_features=None, class_idx={}, crop_roi=None, file_extension=".png"):
+    if phase is not None:
+        classes_dir = os.path.join(base_dir, phase)
+    if phase is None:
+        classes_dir = base_dir
     classes = os.listdir(classes_dir)
     images = []
     labels = []
@@ -29,7 +32,7 @@ def named_folders(base_dir, phase, prepare_features=None, class_idx={}, crop_roi
         imgs_per_class[c] = 0
         class_dir = os.path.join(classes_dir, c)
         for filename in os.listdir(class_dir):
-            if filename.endswith(".png"):
+            if filename.endswith(file_extension):
                 feature = imread(os.path.join(class_dir, filename), mode="RGB")
                 if crop_roi is not None:
                     feature = crop_center(feature, crop_roi[0], crop_roi[1])
@@ -46,8 +49,8 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
     print("Loading Dataset:")
-    roi = (50, 100)
-    imgs_per_class, images, labels, class_idx = named_folders("data/person_classification", "train", crop_roi=roi)
+    roi = (200, 200)
+    imgs_per_class, images, labels, class_idx = named_folders("data/lfw-deepfunneled", phase=None, crop_roi=roi, file_extension=".jpg")
 
     print("Classes and image count:")
     print(imgs_per_class)

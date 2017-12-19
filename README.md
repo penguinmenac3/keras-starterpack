@@ -14,6 +14,7 @@ To get you started quickly.
 3. ImageNet [TODO]
 4. Coco [TODO]
 5. [Cifar10/Cifar100](datasets/classification/cifar.py)
+6. [LFW (with named folders)](datasets/classification/named_folders.py)
 6. PASCAL VOC [TODO]
 7. Places [TODO]
 8. Kitti [TODO]
@@ -42,17 +43,19 @@ More non famous models by myself:
 
 1. [CNN for MNIST](models/mnist_cnn.py)
 2. [CNN for Person Classification](models/tinypersonnet.py)
+3. [CNN for Person Identification [WIP]](models/deeplfw.py)
 
 ## Examples
 
 Some samples that should help getting into stuff.
 
 1. [MNIST](examples/mnist.py)
-2. Imagenet (Baselines) [TODO]
-3. Bounding Box Regression [TODO]
-4. Segmentations [TODO]
-5. Instance Masks [TODO]
-6. Reinforcement Learning [TODO]
+2. [LFW](examples/lfw.py)
+3. Imagenet (Baselines) [TODO]
+4. Bounding Box Regression [TODO]
+5. Segmentations [TODO]
+6. Instance Masks [TODO]
+7. Reinforcement Learning [TODO]
 
 On non publically availible data:
 (however can be used on your own data)
