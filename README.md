@@ -4,6 +4,24 @@ This repo aims to contain everything required to quickly develop a deep neural n
 It comes with several dataset loaders and network architectures.
 If I can find it the models will also contain pretrained weights.
 
+## Install
+
+Simply create a new python virtual environment (preferably python 3.x) and install the requirements listed in the [requirements.txt](requirements.txt).
+Properly install tensorflow-gpu please follow the [official instructions](https://www.tensorflow.org/install/) carefully.
+
+
+## Running examples
+
+Either use an ide such as pycharm and set your working directory to the keras-starterpack folder.
+Or launch your code from the command line like the example bellow.
+
+```bash
+# Activate your virtual environment (in my case keras_venv)
+# Then do the following
+(keras_venv) $ cd /PATH/TO/keras-starterpack
+(keras_venv) $ pyhon -m examples.mnist
+```
+
 ## Datasets
 
 There are handlers for several datasets.
@@ -48,6 +66,11 @@ More non famous models by myself:
 ## Examples
 
 Some samples that should help getting into stuff.
+
+Notebooks:
+1. [MNIST Notebook](examples/mnist.ipynb)
+
+Code:
 
 1. [MNIST](examples/mnist.py)
 2. [LFW](examples/lfw.py)
