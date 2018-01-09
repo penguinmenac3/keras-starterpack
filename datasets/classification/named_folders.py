@@ -10,7 +10,7 @@ def one_hot(idx, max_idx):
     return label
 
 
-def crop_center(img,cropx,cropy):
+def crop_center(img,cropy,cropx):
     y, x, _ = img.shape
     startx = x//2-(cropx//2)
     starty = y//2-(cropy//2)

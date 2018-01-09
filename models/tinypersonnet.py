@@ -7,7 +7,7 @@ from keras.regularizers import l2
 
 
 def prepare_data(img):
-    img = imresize(img, (50, 100)).astype(np.float32)
+    img = imresize(img, (100, 50)).astype(np.float32)
     img[:, :, [0, 1, 2]] = img[:, :, [2, 1, 0]]  # rgb2bgr
     img[:, :, 0] -= 103.939
     img[:, :, 1] -= 116.779
@@ -17,7 +17,7 @@ def prepare_data(img):
 
 def tinypersonnet(weights_path=None):
     l2_weight = 0.0
-    x = Input(shape=(50, 100, 3))
+    x = Input(shape=(100, 50, 3))
 
     conv1 = x
     conv1 = Conv2D(16, (3, 3), activation='relu', name="conv1", kernel_regularizer=l2(l2_weight))(conv1)
@@ -37,7 +37,7 @@ def tinypersonnet(weights_path=None):
     pool4 = MaxPooling2D((2, 2), strides=(2, 2), name="pool4")(conv4)
     pool4 = Dropout(0.5)(pool4)
 
-    fc1 = Conv2D(64, (1, 4), activation='relu', name="fc1", kernel_regularizer=l2(l2_weight))(pool4)
+    fc1 = Conv2D(64, (4, 1), activation='relu', name="fc1", kernel_regularizer=l2(l2_weight))(pool4)
     fc1 = Dropout(0.5)(fc1)
 
     probs = Flatten()(fc1)

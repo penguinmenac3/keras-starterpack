@@ -16,8 +16,16 @@ def f1_score(true, pred, f1_score_class):
         if p[f1_score_class] > 0.5:
             pred_positives += 1
 
-    precision = correct_positives / pred_positives
-    recall = correct_positives / true_positives
+    if pred_positives > 0:
+        precision = correct_positives / pred_positives
+    else:
+        precision = 0
+    if true_positives > 0:
+        recall = correct_positives / true_positives
+    else:
+        recall = 0
+    if precision == 0 and recall == 0:
+        return 0
     return 2 * precision * recall / (precision + recall)
 
 

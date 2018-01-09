@@ -6,16 +6,31 @@ from utils.plot_losses import PlotLosses
 import time
 import datetime
 import numpy as np
+import matplotlib.pyplot as plt
+
+DEBUG = False
 
 
 if __name__ == "__main__":
     time_str = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H.%M.%S')
 
     print("\nLoading Dataset...")
-    roi = (50, 100)
+    roi = (100, 50)
     class_map = {"p": 0, "n": 1}
     imgs_per_class, images, labels, class_idx = named_folders("data/person_classification", "train", prepare_data, class_map, crop_roi=roi)
     test_imgs_per_class, test_images, test_labels, test_class_idx = named_folders("data/person_classification", "test", prepare_data, class_map, crop_roi=roi)
+
+    if DEBUG:
+        for idx in range(10):
+            image = images[idx + 2436 - 5]
+            print(image.shape)
+            image[:, :, 0] += 103.939
+            image[:, :, 1] += 116.779
+            image[:, :, 2] += 123.68
+            image[:, :, [0, 1, 2]] = image[:, :, [2, 1, 0]]  # rgb2bgr
+            image /= 255.0
+            plt.imshow(image)
+            plt.show()
 
     print("Train Classes and image count:")
     print(imgs_per_class)
