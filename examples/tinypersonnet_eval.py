@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
 
     print("\nLoad Model: tinypersonnet")
-    model = tinypersonnet(weights_path="models/weights/tinypersonnet_2017-12-12_16.57.46.h5")
+    model = tinypersonnet(weights_path="models/weights/tinypersonnet_2018-01-09_18.26.01.h5")
 
     print("\nCreate SGD Optimizer")
     sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
@@ -46,10 +46,10 @@ if __name__ == "__main__":
     negatives = 0
     with open(test_result_file, "w") as text_file:
         for i in range(predictions.shape[0]):
-            result = predictions[i][0] - predictions[i][1]
+            result = predictions[i][0]
             results.append(result)
             text_file.write("%.2f\n" % result)
-            if result > 0:
+            if result > 0.5:
                 positives += 1
             else:
                 negatives += 1
@@ -60,9 +60,9 @@ if __name__ == "__main__":
             img[:, :, 2] += 123.68
             img[:, :, [0, 1, 2]] = img[:, :, [2, 1, 0]]  # rgb2bgr
             img /= 255.0
-            print(img)
-            plt.imshow(img)
-            plt.show()
+            #print(img)
+            #plt.imshow(img)
+            #plt.show()
 
     print(results)
     print("positives: %d; negatives: %d" % (positives, negatives))

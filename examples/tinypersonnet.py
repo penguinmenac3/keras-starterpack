@@ -1,6 +1,6 @@
 from models.tinypersonnet import tinypersonnet, prepare_data
 from datasets.classification.named_folders import named_folders
-from keras.optimizers import SGD
+from keras.optimizers import SGD, RMSprop
 from keras.utils import plot_model
 from utils.plot_losses import PlotLosses
 import time
@@ -44,13 +44,15 @@ if __name__ == "__main__":
     print("Saved structure in: models/weights/tinypersonnet_architecture_%s.png" % time_str)
 
     print("\nCreate SGD Optimizer")
-    sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=["accuracy"])
+    #optimizer = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
+    optimizer = RMSprop(lr=0.001)
+    model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=["accuracy"])
 
     print("\nFit model...")
     plot_losses = PlotLosses("models/weights/tinypersonnet_loss_%s.png" % time_str,
                              "models/weights/tinypersonnet_acc_%s.png" % time_str,
                              "models/weights/tinypersonnet_f1_%s.png" % time_str,
+                             "models/weights/tinypersonnet_roc_%s.png" % time_str,
                              validation_data=(test_images, test_labels), f1_score_class=class_map["p"])
     model.fit(x=images, y=labels, batch_size=64, epochs=200, callbacks=[plot_losses], validation_data=(test_images, test_labels), verbose=0)
 
