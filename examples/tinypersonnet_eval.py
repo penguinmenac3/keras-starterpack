@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
 
     print("\nLoad Model: tinypersonnet")
-    model = tinypersonnet(weights_path="models/weights/tinypersonnet_2018-01-09_18.26.01.h5")
+    model = tinypersonnet(weights_path="models/weights/tinypersonnet_2018-01-09_20.04.47.h5")
 
     print("\nCreate SGD Optimizer")
     sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)

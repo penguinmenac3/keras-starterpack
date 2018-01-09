@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     print("\nCreate SGD Optimizer")
     #optimizer = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
-    optimizer = RMSprop(lr=0.001)
+    optimizer = RMSprop(lr=0.0005)
     model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=["accuracy"])
 
     print("\nFit model...")
@@ -54,7 +54,7 @@ if __name__ == "__main__":
                              "models/weights/tinypersonnet_f1_%s.png" % time_str,
                              "models/weights/tinypersonnet_roc_%s.png" % time_str,
                              validation_data=(test_images, test_labels), f1_score_class=class_map["p"])
-    model.fit(x=images, y=labels, batch_size=64, epochs=200, callbacks=[plot_losses], validation_data=(test_images, test_labels), verbose=0)
+    model.fit(x=images, y=labels, batch_size=256, epochs=200, callbacks=[plot_losses], validation_data=(test_images, test_labels), verbose=0)
 
     model_json = model.to_json()
     with open("models/weights/tinypersonnet_%s.json" % time_str, "w") as json_file:

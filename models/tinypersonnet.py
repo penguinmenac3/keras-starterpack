@@ -18,26 +18,29 @@ def prepare_data(img):
 def tinypersonnet(weights_path=None):
     l2_weight = 0.0
     x = Input(shape=(100, 50, 3))
+    k1 = 16
+    k2 = 32
+    k3 = 64
 
     conv1 = x
-    conv1 = Conv2D(16, (3, 3), activation='relu', name="conv1", kernel_regularizer=l2(l2_weight))(conv1)
+    conv1 = Conv2D(k1, (3, 3), activation='relu', name="conv1", kernel_regularizer=l2(l2_weight))(conv1)
     pool1 = MaxPooling2D((2, 2), strides=(2, 2), name="pool1")(conv1)
 
     conv2 = pool1
-    conv2 = Conv2D(32, (3, 3), activation='relu', name="conv2", kernel_regularizer=l2(l2_weight))(conv2)
+    conv2 = Conv2D(k2, (3, 3), activation='relu', name="conv2", kernel_regularizer=l2(l2_weight))(conv2)
     pool2 = MaxPooling2D((2, 2), strides=(2, 2), name="pool2")(conv2)
 
     conv3 = pool2
-    conv3 = Conv2D(64, (3, 3), activation='relu', name="conv3", kernel_regularizer=l2(l2_weight))(conv3)
+    conv3 = Conv2D(k3, (3, 3), activation='relu', name="conv3", kernel_regularizer=l2(l2_weight))(conv3)
     pool3 = MaxPooling2D((2, 2), strides=(2, 2), name="pool3")(conv3)
     pool3 = Dropout(0.5)(pool3)
 
     conv4 = pool3
-    conv4 = Conv2D(64, (3, 3), activation='relu', name="conv4", kernel_regularizer=l2(l2_weight))(conv4)
+    conv4 = Conv2D(k3, (3, 3), activation='relu', name="conv4", kernel_regularizer=l2(l2_weight))(conv4)
     pool4 = MaxPooling2D((2, 2), strides=(2, 2), name="pool4")(conv4)
     pool4 = Dropout(0.5)(pool4)
 
-    fc1 = Conv2D(64, (4, 1), activation='relu', name="fc1", kernel_regularizer=l2(l2_weight))(pool4)
+    fc1 = Conv2D(k3, (4, 1), activation='relu', name="fc1", kernel_regularizer=l2(l2_weight))(pool4)
     fc1 = Dropout(0.5)(fc1)
 
     probs = Flatten()(fc1)
