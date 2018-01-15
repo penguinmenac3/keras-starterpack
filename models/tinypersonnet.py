@@ -12,11 +12,12 @@ def prepare_data(img):
     img[:, :, 0] -= 103.939
     img[:, :, 1] -= 116.779
     img[:, :, 2] -= 123.68
+    img /= 128.0
     return img
 
 
 def tinypersonnet(weights_path=None):
-    l2_weight = 0.0
+    l2_weight = 0.0002
     x = Input(shape=(100, 50, 3))
     k1 = 16
     k2 = 32
